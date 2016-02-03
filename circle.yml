@@ -12,6 +12,9 @@ dependencies:
     # store docker image used in cache
     - mkdir -p ~/docker; docker save ptcuops/build-base > ~/docker/base.tar
     - pwd
+    - ls
+    - echo $CIRCLE_ARTIFACTS
+    
 
   cache_directories:
     - "~/docker"
