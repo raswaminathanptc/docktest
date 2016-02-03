@@ -14,6 +14,7 @@ dependencies:
     - pwd
     - ls
     - echo $CIRCLE_ARTIFACTS
+    - cp target/* $CIRCLE_ARTIFACTS
     
 
   cache_directories:
@@ -25,5 +26,4 @@ test:
 
 general:
   artifacts:
-    - "xla-app/xla-app/target/*.jar"
-    - "xla-app/xla-client/target/*.jar"
+    - "target/*.war"
