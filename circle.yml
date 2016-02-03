@@ -1,0 +1,25 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - docker info
+    - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+    # load cached docker image
+    - if [[ -e ~/docker/base.tar ]]; then docker load -i ~/docker/base.tar; fi
+    - ./dbuilder.sh mvn dependency:resolve
+    # store docker image used in cache
+    - mkdir -p ~/docker; docker save ptcuops/build-base > ~/docker/base.tar
+
+  cache_directories:
+    - "~/docker"
+
+test:
+  override:
+    - ./dbuilder.sh mvn -P buildnumber,gwt-production-mode package
+
+general:
+  artifacts:
+    - "xla-app/xla-app/target/*.jar"
+    - "xla-app/xla-client/target/*.jar"
