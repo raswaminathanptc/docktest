@@ -1,6 +1,6 @@
 machine:
   java:
-    version:1.8.0_71
+    - version:1.8.0_71
   services:
     - docker
 
