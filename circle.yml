@@ -1,4 +1,8 @@
 machine:
+  java:
+    version:1.8.0_71
+  maven:
+    version:3.1.0
   services:
     - docker
 
@@ -11,6 +15,7 @@ dependencies:
     - ./dbuilder.sh mvn dependency:resolve
     # store docker image used in cache
     - mkdir -p ~/docker; docker save ptcuops/build-base > ~/docker/base.tar
+    - mvn --version
     - cp target/*.war $CIRCLE_ARTIFACTS
     
   cache_directories:
